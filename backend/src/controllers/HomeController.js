@@ -5,9 +5,9 @@
  */
 
 class HomeController {
-    get(req, res, next){
-        res.render('index', { title: 'Express' });
+    get(req, res, next) {
+        res.render("index", { title: "Express" });
     }
 }
 
-module.exports = new HomeController;
+module.exports = new HomeController();

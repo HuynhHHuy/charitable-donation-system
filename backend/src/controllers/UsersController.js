@@ -4,11 +4,10 @@
  * @author Le Trung Nhan
  */
 
-
 class UsersController {
     get(req, res, next) {
         res.send("respond with a resource");
     }
 }
 
-module.exports = new UsersController;
+module.exports = new UsersController();
