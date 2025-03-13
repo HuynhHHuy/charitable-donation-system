@@ -31,6 +31,4 @@ app.use(
 
 app.use("/api/auth", authRouter);
 
-app.listen(process.env.PORT, () => {
-    console.log("Server is runnig at PORT", process.env.PORT);
-});
+module.exports = app;
