@@ -10,7 +10,7 @@ require("dotenv").config()
 const authRouter = require("./routes/auth.route")
 
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(express.json());
 
 // Middleware to parse JSON & URL-encoded data
