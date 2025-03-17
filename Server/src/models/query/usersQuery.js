@@ -1,6 +1,6 @@
 const pool = require("../configDB")
 
-const getAllInfo = async (data) => {    
+const getInfoFilter = async (data) => {    
     try {
         const pairs = data.reduce((acc, curr) => {
             const key = Object.keys(curr)[0]
@@ -12,7 +12,7 @@ const getAllInfo = async (data) => {
         }, "").slice(0, -5);        
         
         const userInfo = await pool.query(`SELECT * FROM users WHERE ${pairs}`)
-
+        
         return userInfo.rows
     } catch (error) {
         console.log(error);
@@ -38,6 +38,6 @@ const insertUser = async (data) => {
 }
 
 module.exports = {
-    getAllInfo,
+    getInfoFilter,
     insertUser,
 }

@@ -9,7 +9,6 @@ require("dotenv").config()
 // Router
 const authRouter = require("./routes/auth.route")
 
-
 // app.use(logger("dev"));
 app.use(express.json());
 
