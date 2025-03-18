@@ -64,6 +64,28 @@ const loginWithGoogle = (req, res) => {
     });
 };
 
+const checkLogin = async (req, res) => {
+    try {
+        const token = res.cookie.token
+
+        if (!token) return res.json({ error: 1, message: "Token is missing" })
+
+        const { user_id, email } = await jwt.verify(token, process.env.SECRET_KEY)
+        
+        if (!user_id || !email) return res.json({ error: 2, message: "Token is incorrect" })
+
+        let user = await getInfoFilter([{ user_id }, { email }])
+
+        if (user.length === 0) return res.json({ error: 3, message: "User not found" })
+        
+        return res.json({ error: 0, results: { user_id, email } })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 1, message: "Server is broken" })
+    }
+}
+
 const signUpAccount = async (req, res) => {
     const { email, password, full_name, phone } = req.body;
 
@@ -96,4 +118,5 @@ module.exports = {
     loginWithLocal,
     loginWithGoogle,
     signUpAccount,
+    checkLogin,
 };

@@ -14,8 +14,10 @@ router.get("/login/google/callback",
     authController.loginWithGoogle
 )
 
+// check login status /api/auth/login/check
+router.get("/login/check", authController.checkLogin)
+
 // register /api/auth/register
 router.post("/register", authController.signUpAccount)
-
 
 module.exports = router
