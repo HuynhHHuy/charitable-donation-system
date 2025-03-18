@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { checkLoginStatus } from "../services/api/authApi";
 
-export const fetchLoginStatus = createAsyncThunk(
-    "auth/checkLogin",
-    async () => {
-        const res = await checkLoginStatus();
-        if (res.error !== 0) throw new Error(res.message)
-        
-        return res.results
-    }
-)
+export const fetchLoginStatus = createAsyncThunk("auth/checkLogin", async () => {
+    const res = await checkLoginStatus();
+    console.log(res);
+
+    if (res.error !== 0) throw new Error(res.message);
+
+    return res.results;
+});
 
 const authSlice = createSlice({
     name: "auth",
@@ -18,12 +17,18 @@ const authSlice = createSlice({
         user: null,
         status: "idle",
         error: null,
-        isLoggin: false,
+        isLoggedIn: false
     },
     reducers: {
         logout: (state) => {
             state.user = null;
+            state.isLoggedIn = false;
         },
+        login: (state, action) => {
+            state.status = "succeeded";
+            state.user = action.payload;
+            state.isLoggedIn = true;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -34,13 +39,14 @@ const authSlice = createSlice({
             .addCase(fetchLoginStatus.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.user = action.payload;
-                state.isLoggin = true;
+                state.isLoggedIn = true;
             })
             .addCase(fetchLoginStatus.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.payload;
             });
-    },
+    }
 });
 
-export default authSlice.reducer
+export const { login, logout } = authSlice.actions;
+export default authSlice.reducer;

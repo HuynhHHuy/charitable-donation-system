@@ -14,6 +14,9 @@ router.get("/login/google/callback",
     authController.loginWithGoogle
 )
 
+// logout /api/auth/logout
+router.get("/logout", authController.logout)
+
 // check login status /api/auth/login/check
 router.get("/login/check", authController.checkLogin)
 

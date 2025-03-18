@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Style/Header.css";
 import { IconButton, Avatar, Drawer, Box, List, ListItem, Button } from "@mui/material";
@@ -7,20 +7,38 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
+import { logout as logOutApi } from '../../services/api/authApi'
 import MainLogo from "../../assets/images/MainLogo.jpg";
+import { logout } from "../../redux/authSlice.js"
 
 function Header() {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
-    const isLoggin = useSelector((state) => state.auth.isLoggin);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+    const handleLogout = async () => {
+        try {
+            const res = await logOutApi()
+            if (res.error !== 0) return;
+
+            dispatch(logout())
+
+            navigate("/")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <header className="px-2 w-full flex items-center min-h-[56px] fixed">
+        <header className="px-2 w-full flex items-center min-h-[56px] fixed flex-1 shadow">
             <nav className="w-full h-full flex flex-row justify-between items-center">
                 <IconButton>
                     <SearchOutlinedIcon></SearchOutlinedIcon>
                 </IconButton>
-                <Avatar src={MainLogo} alt="Main Logo" variant="rounded" />
+                <IconButton onClick={() => navigate("/")}>
+                    <Avatar src={MainLogo} alt="Main Logo" variant="rounded" />
+                </IconButton>
                 <IconButton onClick={() => setIsDrawerOpen(true)}>
                     <MenuIcon></MenuIcon>
                 </IconButton>
@@ -58,7 +76,7 @@ function Header() {
                         }}>
                         Start a Fund
                     </Button>
-                    {!isLoggin && (
+                    {!isLoggedIn ? (
                         <Button
                             fullWidth
                             variant="outlined"
@@ -70,9 +88,30 @@ function Header() {
                                 color: "#252525",
                                 fontWeight: "600"
                             }}
-                            onClick={() => navigate("/login")}    
-                        >
+                            onClick={() => {
+                                navigate("/login");
+                                setIsDrawerOpen(false);
+                            }}>
                             Login
+                        </Button>
+                    ) : (
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            sx={{
+                                marginTop: 3,
+                                paddingY: "12px",
+                                borderRadius: 2,
+                                borderColor: "#6f6f6f",
+                                color: "white",
+                                fontWeight: "500",
+                                backgroundColor: "#ff0f10"
+                            }}
+                            onClick={() => {
+                                handleLogout();
+                                setIsDrawerOpen(false);
+                            }}>
+                            Logout
                         </Button>
                     )}
                 </Box>

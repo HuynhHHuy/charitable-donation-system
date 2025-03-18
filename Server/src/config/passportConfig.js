@@ -8,22 +8,24 @@ const { getInfoFilter, insertUser } = require("../models/query/usersQuery");
 
 // Local Strategy
 passport.use(
-    new LocalStrategy(async function (username, password, done) {
-        try {
-            if (!username || !password) {
+    new LocalStrategy(async function (email, password, done) {        
+        try {            
+            if (!email || !password) {
                 return done(null, false, { message: "Missing credentials" });
             }
 
-            const result = await getInfoFilter([{ email: username }]);
-
-            if (result.rows.length === 0)
+            let result = await getInfoFilter([{ email: email }, { provider: "local" }]);            
+            
+            if (result.length === 0)
                 return done(null, false, { message: "Username not found" });
-
-            const isMatch = await bcrypt.compare(password, result.password);
+            
+            result = result[0]
+            
+            const isMatch = await bcrypt.compare(password, result.password_hash);            
 
             if (!isMatch) return done(null, false, { message: "Password is incorrect" });
 
-            return done(null, result.rows[0]);
+            return done(null, result);
         } catch (error) {
             return done(error);
         }
@@ -58,7 +60,7 @@ passport.use(
                 };
 
                 // If not existed
-                const newUser = await insertUser([{ email }, { full_name }, { password_hash }, { profile_image }])
+                const newUser = await insertUser([{ email }, { full_name }, { password_hash }, { profile_image }, { provider: "google" }])
                 return done(null, { user_id: newUser.user_id, email: newUser.email });
             } catch (error) {
                 return done(error);
