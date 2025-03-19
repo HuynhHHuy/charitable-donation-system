@@ -50,7 +50,7 @@ passport.use(
             try {
                 if (!email) return done("Server is broken", false);
 
-                const user = await getInfoFilter([{ email }]);
+                const user = await getInfoFilter([{ email }, { provider: "google" }]);
                 
                 // If user is existed
                 if (user.length === 1) {

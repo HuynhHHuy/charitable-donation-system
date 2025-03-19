@@ -9,3 +9,9 @@
     width: 100%;
     flex: 1;
 }
+
+@media (min-width: 900px) {
+    .layout-content {
+        margin-top: 80px;
+    }
+}

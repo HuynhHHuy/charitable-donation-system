@@ -6,8 +6,10 @@ const pool = new Pool({
     ssl: process.env.DATABASE_URL.includes("localhost") ? false : { rejectUnauthorized: false }
 });
 
-pool.connect()
-    .then(() => console.log("Data base has been connected!"))
-    .catch((error) => console.log(error));
+pool.on('error', (err) => {
+    console.error('Unexpected error on idle PostgreSQL client', err);
+});
+
+console.log("Database pool has been initialized!");
 
 module.exports = pool;
