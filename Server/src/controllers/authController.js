@@ -4,6 +4,9 @@ require("dotenv").config();
 
 const { getInfoFilter, insertUser } = require("../models/query/usersQuery");
 const hashPassword = require("../utils/hashPassword");
+const verifySignUpMail = require("../utils/sendMail/verifySignUpMail");
+const { getIo } = require('../config/socket')
+const { notifyVerificationStatus } = require("../utils/sockets/verifySignUp")
 
 // Login with local
 const loginWithLocal = (req, res, next) => {
@@ -54,7 +57,7 @@ const loginWithGoogle = (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    return res.redirect(`${process.env.CLIENT_URL}/login-success`)
+    return res.redirect(`${process.env.CLIENT_URL}/login-success`);
 };
 
 // Logout
@@ -67,12 +70,12 @@ const logout = (req, res) => {
     });
 
     return res.json({ error: 0, message: "Logged out successfully" });
-}
+};
 
 const checkLogin = async (req, res) => {
     try {
         const token = req.cookies.token;
-        
+
         if (!token) return res.json({ error: 1, message: "Token is missing" });
 
         const { user_id, email } = await jwt.verify(token, process.env.SECRET_KEY);
@@ -90,17 +93,66 @@ const checkLogin = async (req, res) => {
     }
 };
 
-const signUpAccount = async (req, res) => {
-    const { email, password, full_name, phone } = req.body;
-
+// Verify Sign Up
+const verifySignUp = async (req, res) => {
+    const email = req.body.email;
     try {
-        if (!email || !password || !full_name || !phone)
-            return res.status(400).json({ error: 1, message: "Missing some required fields" });
+        if (!email)
+            return res.status(400).json({ error: 2, message: "Missing some requied fields" });
 
-        const isExisted = await getInfoFilter([{ email }, { provider: "local" }]);
+        const isExisted = await getInfoFilter([{ email }, { provider: "local" }])
+
+        if (isExisted.length === 1) return res.json({ error: 3, message: "This email has been existed" })
+
+        const token = await jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: "5m" });
+
+        const url = `${process.env.CLIENT_URL}/verify/sign-up?token=${token}`;
+
+        await verifySignUpMail(url, email, "CHARITY DONATION UIT: Verify Account");
+
+        res.json({ error: 0 });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 1, message: "Server is broken" });
+    }
+};
+
+const handleVerifyAccount = async (req, res) => {
+    const token = req.body.token;    
+    try {
+        let email = jwt.verify(token, process.env.SECRET_KEY)
+        email = email.email
+            
+        if (!email) return res.json({ error: 2 })
+
+        const io = getIo()
+
+        if (!io) {
+            console.log("Socket.io chưa được khởi tạo");
+            return res.json({ error: 1, message: "Server error" });
+        }
+
+        notifyVerificationStatus(io, email, true)
+
+        res.json({ error: 0 })
+        
+    } catch (error) {
+        console.log(error);
+        return res.json({ error: 1, message: "Expired or Invalid token" });
+    }
+};
+
+const signUpAccount = async (req, res) => {
+    const { email, password, full_name } = req.body;
+    
+    try {
+        if (!email || !password || !full_name)
+            return res.status(400).json({ error: 2, message: "Missing some required fields" });
+
+        const isExisted = await getInfoFilter([{ email }, { provider: "local" }]);        
 
         if (isExisted.length === 1)
-            return res.json({ error: 1, message: "This email has been existed" });
+            return res.json({ error: 3, message: "This email has been existed" });
 
         const hashedPassword = await hashPassword(password);
 
@@ -108,8 +160,9 @@ const signUpAccount = async (req, res) => {
             { email },
             { password_hash: hashedPassword },
             { full_name },
-            { phone }
-        ]);
+            { provider: "local" },
+            { is_verified: true }
+        ]);        
 
         return res.json({ error: 0, message: "Successfully", results: result });
     } catch (error) {
@@ -124,4 +177,6 @@ module.exports = {
     signUpAccount,
     checkLogin,
     logout,
+    verifySignUp,
+    handleVerifyAccount,
 };

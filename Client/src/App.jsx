@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { LayOut, Home, SignIn, SignUp } from "./pages";
-import { GuestRoute, LoginSuccess } from "./components";
+import { GuestRoute, LoginSuccess, VerifyComponent } from "./components";
 import { fetchLoginStatus } from "./redux/authSlice";
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
     return (
         <Routes>
+            <Route path="/verify/sign-up" element={<VerifyComponent />} />
             {/* Guess route */}
             <Route element={<GuestRoute />}>
                 <Route path="/sign-in" element={<SignIn />} />

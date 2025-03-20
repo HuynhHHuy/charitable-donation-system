@@ -4,7 +4,6 @@ import { checkLoginStatus } from "../services/api/authApi";
 
 export const fetchLoginStatus = createAsyncThunk("auth/checkLogin", async () => {
     const res = await checkLoginStatus();
-    console.log(res);
 
     if (res.error !== 0) throw new Error(res.message);
 

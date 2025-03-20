@@ -1,34 +1,35 @@
-var express = require("express");
-var app = express();
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-const cors = require("cors")
-require("dotenv").config()
+const express = require("express");
+const http = require("http");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const ejs = require("ejs");
+require("dotenv").config();
 
-// Router
-const authRouter = require("./routes/auth.route")
+const { setupSocket } = require("./config/socket");
+const app = express();
+const server = http.createServer(app); // Tạo server HTTP
 
-// app.use(logger("dev"));
+setupSocket(server);
+
+// Ejs config
+app.set("view engine", "ejs");
+app.set("views", "./views");
+
+// Middleware
 app.use(express.json());
-
-// Middleware to parse JSON & URL-encoded data
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL,
+        credentials: true
+    })
+);
 
-// Config public route
-app.use(express.static(path.join(__dirname, "public")));
-
-// Config cors policies
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  methods: ["GET", "POST", "PATCH", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
-
+// Router
+const authRouter = require("./routes/auth.route");
 app.use("/api/auth", authRouter);
 
-app.listen(process.env.PORT, () => {
-    console.log("Server is runnig at PORT", process.env.PORT);
-})
+server.listen(process.env.PORT, () => {
+    console.log(`Server is running at PORT ${process.env.PORT}`);
+});

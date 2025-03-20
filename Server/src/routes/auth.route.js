@@ -20,7 +20,13 @@ router.get("/logout", authController.logout)
 // check login status /api/auth/login/check
 router.get("/login/check", authController.checkLogin)
 
-// register /api/auth/register
-router.post("/register", authController.signUpAccount)
+// register /api/auth/sign-up
+router.post("/sign-up", authController.signUpAccount)
+
+// verify sign up /api/auth/verify/sign-up
+router.post("/verify/sign-up", authController.verifySignUp)
+
+// check token /api/auth/verify/check
+router.post("/verify/check", authController.handleVerifyAccount)
 
 module.exports = router
