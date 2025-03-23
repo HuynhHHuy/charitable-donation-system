@@ -10,7 +10,7 @@ import GoogleIcon from "../../assets/icons/GoogleIcon.png";
 import { login } from "../../redux/authSlice.js";
 import { emailValidate, passwordValidate } from "../../services/validateForm";
 import { loginWithLocal } from "../../services/api/authApi.js";
-import ButtonCostume from "../../components/UI/Button/ButtonCostume.jsx";
+import { ButtonCostume } from "../../components/UI";
 
 function SignInMobile() {
     const navigate = useNavigate();
@@ -69,7 +69,6 @@ function SignInMobile() {
 
     return (
         <div className="py-26 px-16 w-full flex flex-col justify-center items-center">
-            
             <Avatar src={MainLogo} alt="Main Logo" />
             <h1 className="mt-6 text-4xl font-semibold text-gray-700">Welcome</h1>
             <h2 className="mt-1 text-sm">Log in to UIT-FundMe to continue.</h2>
@@ -179,7 +178,12 @@ function SignInMobile() {
                 onClick={() => navigate("/sign-up")}>
                 Create an account
             </Button>
-            <ButtonCostume sx={{ marginRight: "auto", marginTop: "15px" }} fullWidth onClick={() => navigate('/')} >Back to Home</ButtonCostume>
+            <ButtonCostume
+                sx={{ marginRight: "auto", marginTop: "15px" }}
+                fullWidth
+                onClick={() => navigate("/")}>
+                Back to Home
+            </ButtonCostume>
         </div>
     );
 }

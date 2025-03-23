@@ -6,7 +6,7 @@ const verifySignUp = (io) => {
     });
 };
 
-const notifyVerificationStatus = (io, email, success) => {    
+const notifyVerificationStatus = (io, email, success) => {       
     io.to(email).emit("server-send-status", success);
 };
 

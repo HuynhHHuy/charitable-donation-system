@@ -12,8 +12,8 @@ function VerifyComponent() {
         const token = params.get("token");
         
         if (!token) return;
-
-        const fetch = async () => {
+        
+        const fetch = async () => {            
             const res = await checkToken(token);
             
             if (res.error === 0) {

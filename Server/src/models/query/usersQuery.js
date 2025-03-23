@@ -9,9 +9,9 @@ const getInfoFilter = async (data) => {
             const formattedValue = typeof value === "string" ? `'${value}'` : value;
 
             return acc + `${key}=${formattedValue} AND `;
-        }, "").slice(0, -5);        
+        }, "").slice(0, -5);
         
-        const userInfo = await pool.query(`SELECT * FROM users WHERE ${pairs}`)
+        const userInfo = await pool.query(`SELECT * FROM users WHERE ${pairs}`)        
         
         return userInfo.rows
     } catch (error) {

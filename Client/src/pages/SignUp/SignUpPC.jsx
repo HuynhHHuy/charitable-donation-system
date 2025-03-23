@@ -2,19 +2,12 @@ import SignBg from "../../assets/images/SignInBgImg.jpg";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-import {
-    Avatar,
-    Button,
-    TextField,
-    IconButton,
-    Box,
-    List,
-    ListItem,
-} from "@mui/material";
+import { Avatar, Button, TextField, IconButton, Box, List, ListItem } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-import ButtonCostume from "../../components/UI/Button/ButtonCostume";
+import { ButtonCostume, Toast } from "../../components/UI";
 import MainLogo from "../../assets/images/MainLogo.png";
 import { verifySignUp, signUp } from "../../services/api/authApi";
 import {
@@ -44,14 +37,15 @@ function SignUpPC() {
         password: false,
         confirmPassword: false
     });
-
-    useEffect(() => {
-        document.title = "SignUp";
-
-        return () => {
-            socket.off("server-send-status");
-        };
-    }, []);
+    const [isOpenToast, setIsOpenToast] = useState({
+        title: "",
+        text: "",
+        type: "",
+        timeToClose: 2000,
+        open: false,
+        progressBar: true
+    });
+    const [loading, setLoading] = useState(false);
 
     const handleVerify = async (e) => {
         e.preventDefault();
@@ -82,32 +76,70 @@ function SignUpPC() {
         }
 
         try {
+            setLoading(true);
             const res = await verifySignUp(inputValue.email);
 
             if (res.error === 3) {
                 setValidData((prev) => ({ ...prev, email: { error: true, message: res.message } }));
+                return;
             }
 
             if (res.error === 0) {
-                socket.on("server-send-status", (success) => {
-                    if (success) {
-                        const fetch = async () => {
-                            const res = await signUp(
-                                inputValue.email,
-                                inputValue.password,
-                                inputValue.fullName
-                            );
-                            if (res.error === 0) navigate("/sign-in");
-                            console.log(res);
-                        };
-                        fetch()
-                    }
-                });
+                setIsOpenToast((prev) => ({
+                    ...prev,
+                    title: "Verify Email",
+                    text: "We have sent you a verify email",
+                    timeToClose: 3000,
+                    open: true
+                }));
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleSignUp = async () => {
+        setLoading(true);
+        try {
+            const resSignUp = await signUp(
+                inputValue.email,
+                inputValue.password,
+                inputValue.fullName
+            );
+            if (resSignUp.error === 0) {
+                setIsOpenToast((prev) => ({
+                    ...prev,
+                    title: "Sign Up Successfully",
+                    text: "You'll be redirected to the sign-in page shortly...",
+                    timeToClose: 3000,
+                    open: true
+                }));
+
+                setTimeout(() => {
+                    navigate("/sign-in");
+                }, 3000);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        socket.on("server-send-status", (success) => {
+            if (success) {
+                handleSignUp();
+            }
+        });
+
+        return () => {
+            socket.off("server-send-status");
+        };
+    }, [handleSignUp]);
 
     return (
         <div
@@ -302,10 +334,22 @@ function SignUpPC() {
                             borderRadius: "8px"
                         }}
                         type="submit">
-                        Sign Up
+                        {loading ? (
+                            <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
+                        ) : (
+                            "Sign Up"
+                        )}
                     </Button>
                 </form>
             </div>
+            <Toast
+                text={isOpenToast.text}
+                title={isOpenToast.title}
+                open={isOpenToast.open}
+                timeToClose={isOpenToast.timeToClose}
+                progressBar={isOpenToast.progressBar}
+                onClose={() => setIsOpenToast((prev) => ({ ...prev, open: false }))}
+            />
         </div>
     );
 }

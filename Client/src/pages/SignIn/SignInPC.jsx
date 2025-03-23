@@ -11,7 +11,7 @@ import GoogleIcon from "../../assets/icons/GoogleIcon.png";
 import { login } from "../../redux/authSlice.js";
 import { emailValidate, passwordValidate } from "../../services/validateForm";
 import { loginWithLocal } from "../../services/api/authApi.js";
-import ButtonCostume from "../../components/UI/Button/ButtonCostume.jsx";
+import { ButtonCostume } from "../../components/UI";
 
 function SignInPC() {
     const navigate = useNavigate();

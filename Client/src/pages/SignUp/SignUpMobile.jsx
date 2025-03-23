@@ -1,16 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-import {
-    Avatar,
-    Button,
-    TextField,
-    IconButton,
-    Box,
-    List,
-    ListItem,
-    ListItemText
-} from "@mui/material";
+import { Avatar, Button, TextField, IconButton, Box, List, ListItem } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 

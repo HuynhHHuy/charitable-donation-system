@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { LayOut, Home, SignIn, SignUp } from "./pages";
-import { GuestRoute, LoginSuccess, VerifyComponent } from "./components";
+import { GuestRoute } from "./components/FilterRoutes";
+import { LoginSuccess, VerifyComponent } from "./components/LogicComponent";
 import { fetchLoginStatus } from "./redux/authSlice";
 
 function App() {

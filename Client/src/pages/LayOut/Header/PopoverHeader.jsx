@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Popover, Button, List, ListItem, ListItemText, ListSubheader } from "@mui/material";
 
-import { DropDown } from "../../../components";
+import { DropDown } from "../../../components/UI";
 
 function PopoverHeader({ dataRender, right = false }) {
     return (
