@@ -1,11 +1,11 @@
-import { Button } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 import "./index.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
-function DropDown({ name, children, right = false }) {
+function DropDown({ name, children, right = false, iconEnd, iconStart, sx }) {
     return (
-        <div className="dropdown">
+        <div className="dropdown" style={{ ...sx }}>
             <Button
                 sx={{
                     color: "#252525",
@@ -13,9 +13,12 @@ function DropDown({ name, children, right = false }) {
                     fontSize: "16px",
                     borderRadius: "20px",
                     paddingX: 2,
+                    gap: 1,
                     ":hover": { backgroundColor: "#fbfaf8" }
                 }}>
+                {iconStart && <div className="flex flex-row ml-2">{iconStart}</div>}
                 {name}
+                {iconEnd && <div className="flex flex-row ml-2">{iconEnd}</div>}
                 <div className="flex flex-row relative">
                     <ArrowDropDownIcon className="arrow-down" />
                     <ArrowDropUpIcon className="arrow-up" />

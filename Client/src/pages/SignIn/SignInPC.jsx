@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Avatar, Button, TextField, IconButton } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import MainLogo from "../../assets/images/MainLogo.png";
 import GoogleIcon from "../../assets/icons/GoogleIcon.png";
@@ -22,12 +23,14 @@ function SignInPC() {
         email: { error: false, message: "" },
         password: { error: false, message: "" }
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         document.title = "Login";
     }, []);
 
     const handleLoginLocal = async (e) => {
+        setIsLoading(true);
         e.preventDefault();
         try {
             let isValid = true;
@@ -57,6 +60,8 @@ function SignInPC() {
             navigate("/");
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -161,7 +166,11 @@ function SignInPC() {
                             borderRadius: "8px"
                         }}
                         type="submit">
-                        Login
+                        {isLoading ? (
+                            <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
+                        ) : (
+                            "Log In"
+                        )}
                     </Button>
                 </form>
                 <div className="my-3 w-full flex flex-row justify-center items-center gap-2">

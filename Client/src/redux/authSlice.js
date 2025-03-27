@@ -13,14 +13,14 @@ export const fetchLoginStatus = createAsyncThunk("auth/checkLogin", async () => 
 const authSlice = createSlice({
     name: "auth",
     initialState: {
-        user: null,
+        user: { user_id: "", email: "" },
         status: "idle",
         error: null,
         isLoggedIn: false
     },
     reducers: {
         logout: (state) => {
-            state.user = null;
+            // state.user = null;
             state.isLoggedIn = false;
         },
         login: (state, action) => {

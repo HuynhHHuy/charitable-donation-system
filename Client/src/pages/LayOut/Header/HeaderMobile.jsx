@@ -92,7 +92,7 @@ function HeaderMobile() {
                                 navigate("/sign-in");
                                 setIsDrawerOpen(false);
                             }}>
-                            Login
+                            Log In
                         </Button>
                     ) : (
                         <Button
@@ -111,7 +111,7 @@ function HeaderMobile() {
                                 handleLogout();
                                 setIsDrawerOpen(false);
                             }}>
-                            Logout
+                            Log Out
                         </Button>
                     )}
                 </Box>

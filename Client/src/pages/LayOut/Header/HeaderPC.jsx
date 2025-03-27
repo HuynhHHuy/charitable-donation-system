@@ -1,13 +1,19 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, List, ListItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 import MainLogo from "../../../assets/images/MainLogo.png";
 import PopoverHeader from "./PopoverHeader";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { logout as logOutApi } from "../../../services/api/authApi.js";
+import { getUserInfo } from "../../../services/api/userApi";
+import NoAvatar from "../../../assets/images/NoAvatar.jpg";
+import { DropDown } from "../../../components/UI";
+import { logout } from "../../../redux/authSlice.js";
 
 const DONATION = {
     name: "Donation",
@@ -102,9 +108,67 @@ const ABOUT = {
     ]
 };
 
+const USER = [
+    {
+        title: "Profile",
+        path: "/profile"
+    },
+    {
+        title: "My Fundraisers",
+        path: "/my-fundraisers"
+    },
+    {
+        title: "My Impact",
+        path: "/my-impact"
+    },
+    {
+        title: "Settings",
+        paht: "/settings"
+    }
+];
+
 function HeaderPC() {
+    const userId = useSelector((state) => state.auth.user.user_id);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            if (userId) {
+                const fetchUserInfo = async () => {
+                    const filters = { user_id: userId };
+                    const res = await getUserInfo(filters);
+                    if (res.error !== 0) {
+                        console.log(res.message);
+                        return;
+                    }
+
+                    let user = res.results[0];
+                    if (user.profile_picture === null) {
+                        user.profile_picture = NoAvatar;
+                    }
+
+                    setUserInfo((prev) => ({ ...prev, ...user }));
+                };
+                fetchUserInfo();
+            }
+        }
+    }, [isLoggedIn, userId]);
+
+    const handleLogout = async () => {
+        try {
+            const res = await logOutApi();
+            if (res.error !== 0) return;
+
+            dispatch(logout());
+
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <header className="px-26 w-full flex flex-row justify-between items-center min-h-[80px] fixed flex-1 shadow text-[#252525] text-[16px] bg-white">
@@ -145,7 +209,7 @@ function HeaderPC() {
                             paddingX: 2,
                             ":hover": { backgroundColor: "#fbfaf8" }
                         }}
-                        onClick={() => navigate('/sign-in')}>
+                        onClick={() => navigate("/sign-in")}>
                         Sign in
                     </Button>
                 )}
@@ -166,6 +230,59 @@ function HeaderPC() {
                         }}>
                         Start a UIT-FundMe
                     </Button>
+                )}
+                {isLoggedIn && (
+                    <DropDown
+                        right={true}
+                        name={userInfo.full_name}
+                        iconStart={<Avatar src={userInfo.profile_picture} alt="User Avatar" />}
+                        sx={{ marginRight: "100px" }}>
+                        <List disablePadding sx={{ width: "150px" }}>
+                            {USER.map((item, index) => {
+                                return (
+                                    <ListItem
+                                        disablePadding
+                                        key={index}
+                                        onClick={() => {
+                                            navigate(item.path);
+                                        }}
+                                        sx={{
+                                            marginY: 1,
+                                            paddingY: "10px",
+                                            paddingX: "20px",
+                                            width: "100%",
+                                            cursor: "pointer",
+                                            ":hover": {
+                                                backgroundColor: "#fbfaf8",
+                                                borderRadius: "10px"
+                                            }
+                                        }}>
+                                        <div className="flex flex-row gap-2">{item.title}</div>
+                                    </ListItem>
+                                );
+                            })}
+                            <ListItem
+                                disablePadding
+                                onClick={() => {
+                                    handleLogout();
+                                    navigate("/sign-in");
+                                }}
+                                sx={{
+                                    marginTop: 2,
+                                    backgroundColor: "#ff0f10",
+                                    marginY: 1,
+                                    paddingY: "10px",
+                                    paddingX: "20px",
+                                    width: "100%",
+                                    cursor: "pointer",
+                                    borderRadius: "10px",
+                                    color: "white",
+                                    fontWeight: "600"
+                                }}>
+                                <div className="flex flex-row gap-2">Log Out</div>
+                            </ListItem>
+                        </List>
+                    </DropDown>
                 )}
             </nav>
         </header>
