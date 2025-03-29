@@ -31,7 +31,7 @@ function HeaderMobile() {
     }
 
     return (
-        <header className="px-2 w-full flex items-center min-h-[56px] fixed flex-1 shadow">
+        <header className="z-50 px-2 w-full flex items-center min-h-[56px] fixed flex-1 shadow bg-white">
             <nav className="w-full h-full flex flex-row justify-between items-center">
                 <IconButton>
                     <SearchOutlinedIcon></SearchOutlinedIcon>

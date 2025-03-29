@@ -171,7 +171,7 @@ function HeaderPC() {
     };
 
     return (
-        <header className="px-26 w-full flex flex-row justify-between items-center min-h-[80px] fixed flex-1 shadow text-[#252525] text-[16px] bg-white">
+        <header className="z-50 px-26 w-full flex flex-row justify-between items-center min-h-[80px] fixed flex-1 shadow text-[#252525] text-[16px] bg-white">
             <nav className="flex flex-row justify-start items-center">
                 <Button
                     size="small"
