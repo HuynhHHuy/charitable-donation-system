@@ -3,13 +3,13 @@ import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { PiFlowerLotusDuotone } from "react-icons/pi";
 
 function MainGoal({ setData, saveData }) {
-    const [inputValue, setInputValue] = useState(saveData.goal || "");
+    const [inputValue, setInputValue] = useState(saveData.goal_amount || "");
 
     const handleFormatValue = (e) => {
         const value = e.target.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        setData({ goal_amount: value });
         setInputValue(value);
-        setData({ goal: value });
-    }
+    };
 
     return (
         <div className="px-[160px] w-full h-full flex flex-col justify-center items-start text-center leading-12">
@@ -39,11 +39,15 @@ function MainGoal({ setData, saveData }) {
                 <span>VND</span>
             </fieldset>
             <div className="mt-10 p-5 w-full bg-[#f4f2ec] rounded-2xl flex flex-col justify-between items-start gap-2">
-                <h2 className="text-[16px] font-semibold">Fundraisers like yours typically aim to raise $11,000 or more.</h2>
+                <h2 className="text-[16px] font-semibold">
+                    Fundraisers like yours typically aim to raise $11,000 or more.
+                </h2>
                 <hr className="w-full border-gray-300" />
                 <div className="flex flex-row justify-start items-center gap-2">
                     <PiFlowerLotusDuotone className="text-green-700" />
-                    <p className="text-[14px] text-[#6f6f6f]">Based on goals for similar fundraisers</p>
+                    <p className="text-[14px] text-[#6f6f6f]">
+                        Based on goals for similar fundraisers
+                    </p>
                 </div>
             </div>
         </div>

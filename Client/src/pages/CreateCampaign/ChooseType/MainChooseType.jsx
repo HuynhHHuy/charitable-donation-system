@@ -4,7 +4,7 @@ import { getCategoriesCampaign } from "../../../services/api/campaignApi";
 
 function MainChooseType({ setData, saveData }) {
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(saveData.category || "");
+    const [selectedCategory, setSelectedCategory] = useState("");
     useEffect(() => {
         const fetchCategories = async () => {
             const res = await getCategoriesCampaign();
@@ -14,7 +14,10 @@ function MainChooseType({ setData, saveData }) {
                 setCategories(res.results);
                 if (!saveData.category) {
                     setSelectedCategory(res.results[0].category_name);
-                    setData({ category: res.results[0].category_name });
+                    setData({ category: res.results[0].category_id });
+                }
+                else {                    
+                    setSelectedCategory(res.results[saveData.category - 1].category_name);
                 }
             }
         };
@@ -40,7 +43,7 @@ function MainChooseType({ setData, saveData }) {
                                 className="hidden peer"
                                 onChange={(e) => {
                                     setSelectedCategory(e.target.value);
-                                    setData({ category: e.target.value });
+                                    setData({ category: category.category_id });
                                 }}
                             />
                             <label

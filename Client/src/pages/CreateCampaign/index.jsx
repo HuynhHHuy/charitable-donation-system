@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import IntroChooseType from "./ChooseType/IntroChooseType";
 import MainChooseType from "./ChooseType/MainChooseType";
@@ -7,6 +9,9 @@ import IntroGoal from "./Goal/IntroGoal";
 import MainGoal from "./Goal/MainGoal";
 import IntroInfoCampaign from "./InfoCampaign/IntroInfoCampaign";
 import MainInfoCampaign from "./InfoCampaign/MainInfoCampaign";
+import IntroMedia from "./Media/IntroMedia";
+import MainMedia from "./Media/MainMedia";
+import { createCampaign } from "../../services/api/campaignApi";
 
 const COMPONENTS = [
     {
@@ -23,18 +28,68 @@ const COMPONENTS = [
         id: 2,
         intro: IntroInfoCampaign,
         main: MainInfoCampaign
+    },
+    {
+        id: 3,
+        intro: IntroMedia,
+        main: MainMedia
     }
 ];
 
 function CreateCampaign() {
+    const navigate = useNavigate()
     const [currentComponent, setCurrentComponent] = useState(COMPONENTS[0]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [campaignInfo, setCampaignInfo] = useState({});
+    const [allowContinue, setAllowContinue] = useState(false);
+    const [loadingCreate, setLoadingCreate] = useState(false);
 
-    const setData = (data) => {
+    const setData = useCallback((data) => {
         setCampaignInfo((prev) => {
             return { ...prev, ...data };
         });
+    }, []);
+
+    useEffect(() => {
+        if (currentIndex === 0 && campaignInfo.category) {
+            setAllowContinue(true);
+        } else if (currentIndex === 1 && campaignInfo.goal_amount?.trim()) {
+            setAllowContinue(true);
+        } else if (
+            currentIndex === 2 &&
+            campaignInfo.title?.trim() &&
+            campaignInfo.description?.trim()
+        ) {
+            setAllowContinue(true);
+        } else if (currentIndex === 3 && campaignInfo.campaign_image) {
+            setAllowContinue(true);
+        } else {
+            setAllowContinue(false);
+        }
+    }, [campaignInfo, currentIndex]);
+
+    const handleCreate = async () => {
+        const formData = new FormData();
+
+        Object.entries(campaignInfo).forEach(([key, value]) => {
+            if (key === "campaign_image" && value) {
+                formData.append(key, value);
+            } else if (key === "goal_amount") {
+                formData.append(key, Number(value.replace(/,/g, "")));
+            } else {
+                formData.append(key, value);
+            }
+        });
+
+        try {
+            setLoadingCreate(true);
+            const res = await createCampaign(formData);
+            if (res.error === 0) navigate("/")
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingCreate(false);
+        }
     };
 
     return (
@@ -56,7 +111,9 @@ function CreateCampaign() {
                     />
                     <hr
                         className="border-t-[1px] border-gray-300 my-2"
-                        style={{ width: `${100 - ((currentIndex + 1) / COMPONENTS.length) * 100}%` }}
+                        style={{
+                            width: `${100 - ((currentIndex + 1) / COMPONENTS.length) * 100}%`
+                        }}
                     />
                 </div>
                 <div className="h-1/12 mb-12 px-20 w-full flex flex-row justify-between items-center gap-4">
@@ -72,12 +129,29 @@ function CreateCampaign() {
                     )}
                     {currentIndex < COMPONENTS.length - 1 && (
                         <button
-                            className="bg-[#252525] text-white text-[16px] font-semibold py-4 px-9 rounded-lg mt-4 ml-auto cursor-pointer"
+                            className={`text-white text-[16px] font-semibold py-4 px-9 rounded-lg mt-4 ml-auto ${!allowContinue ? "bg-gray-200" : "bg-[#252525] cursor-pointer"}`}
                             onClick={() => {
+                                if (!allowContinue) return;
                                 setCurrentIndex(currentIndex + 1);
                                 setCurrentComponent(COMPONENTS[currentIndex + 1]);
+                                setAllowContinue(false);
                             }}>
                             Continue
+                        </button>
+                    )}
+                    {currentIndex === COMPONENTS.length - 1 && (
+                        <button
+                            className={`text-white text-[16px] font-semibold py-4 px-9 rounded-lg mt-4 ml-auto ${!allowContinue ? "bg-gray-200" : "bg-[#252525] cursor-pointer"}`}
+                            onClick={() => {
+                                if (!campaignInfo.campaign_image) return;
+                                setAllowContinue(false);
+                                handleCreate();
+                            }}>
+                            {!loadingCreate ? (
+                                "Create!"
+                            ) : (
+                                <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
+                            )}
                         </button>
                     )}
                 </div>

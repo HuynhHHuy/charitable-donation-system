@@ -39,6 +39,10 @@ app.use("/api/user", userRouter);
 const campaignRouter = require("./routes/campaign.route");
 app.use("/api/campaign", campaignRouter);
 
+// Services Router
+const servicesRouter = require("./routes/services.route")
+app.use("/api/services", servicesRouter)
+
 server.listen(process.env.PORT, () => {
     console.log(`Server is running at PORT ${process.env.PORT}`);
 });
