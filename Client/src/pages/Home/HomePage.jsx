@@ -58,7 +58,7 @@ const contentPages = [
     },
     {
         imgSrc: "https://images.gofundme.com/rF84AbSS7PIEYALIgkVV2Y7qjjo=/720x405/https://d2g8igdw686xgo.cloudfront.net/89790069_1742751582684593_r.png",
-        title: "Junger Familienvater plötzlich aus dem Leben gerissen",
+        title: "Junger Familienvater ",
         progress: 112908,
         target: 150000,
         donaters: 101,
@@ -76,7 +76,7 @@ const contentPages = [
     },
     {
         imgSrc: "https://images.gofundme.com/4MBD8c1us6qdSezLrMWb6OYTpJE=/720x405/https://d2g8igdw686xgo.cloudfront.net/89730713_1742502786623603_r.png",
-        title: "Steun Randa in de strijd tegen kanker",
+        title: "Steun Randa ",
         progress: 112908,
         target: 150000,
         donaters: 101,
@@ -85,7 +85,7 @@ const contentPages = [
     },
     {
         imgSrc: "https://images.gofundme.com/NOTvQNGIeMoG7W4ocagYwfzEPZI=/720x405/https://d2g8igdw686xgo.cloudfront.net/89766931_1742655741972037_r.png",
-        title: "Help us bring our Mom - Maura Heffernan (nee O'Gorman) home",
+        title: "Help us bring our Mom - Maura Heffernan home",
         progress: 112908,
         target: 150000,
         donaters: 101,
@@ -94,7 +94,7 @@ const contentPages = [
     },
     {
         imgSrc: "https://images.gofundme.com/vADCUaTznkY-CRQGYhuEcNGg_Cg=/720x405/https://d2g8igdw686xgo.cloudfront.net/89786343_1742737560151077_r.png",
-        title: "Unterstützung für die Familie von Ulrich Guse",
+        title: "Support for the family of Ulrich Guse",
         progress: 112908,
         target: 150000,
         donaters: 101,
@@ -106,7 +106,7 @@ const contentPages = [
 function HomePage() {
     const [isOpen, setIsOpen] = useState(false);
     //dropdown menu
-    const [selectedItem, setSelectedItem] = useState("Actualité internationale");
+    const [selectedItem, setSelectedItem] = useState("International news");
 
     //animate
     const [isAnimating, setIsAnimating] = useState(false);
@@ -229,13 +229,13 @@ function HomePage() {
                     }}>
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                         <h1 className="max-w-2xs mt-0 mb-6 font-semibold text-xl text-[var(--text-color-2)] animate-fadeIn select-none">
-                            La référence en matière de financement participatif
+                            The benchmark in crowdfunding
                         </h1>
                         <h2 className="max-w-2xs font-semibold text-6xl mt-0 mb-0 text-[var(--text-color-2)] animate-fadeIn select-none">
-                            Votre plateforme d'entraide
+                            Charity platform
                         </h2>
                         <button className="font-semibold text-[var(--text-color-3)] mt-12 px-6 py-2 bg-white rounded-xl min-h-14 animate-fadeIn select-none cursor-pointer hover:bg-[#ffffffcc] transition-colors">
-                            Démarrer une cagnotte
+                            Start a fundraiser  
                         </button>
                     </div>
                 </div>
@@ -244,7 +244,7 @@ function HomePage() {
             <div className="relative pb-10 bg-white pt-10 rounded-t-4xl z-10 mt-[-5rem]">
                 <div className="mt-0 mb-0 mx-auto pl-4 pr-4 max-w-[75%]">
                     <h2 className="mt-12 mb-10 mr-0 ml-0 font-bold text-2xl text-[#252525]">
-                        Découvrez des cagnottes en lien avec vos centres d'intérêt
+                        Discover fundraisers related to your interests
                     </h2>
 
                     <div className="bg-white block">
@@ -273,10 +273,10 @@ function HomePage() {
                                                     <TrackChangesIcon className="bg-[#fbfaf8] text-1 rounded-full h-10! w-10! p-2" />
                                                     <div>
                                                         <div className="font-semibold text-1 text-base">
-                                                            Tout près du but
+                                                            Just a step away from the goal
                                                         </div>
                                                         <div className="text-[#6f6f6f] text-[14px]">
-                                                            Cagnottes à 5 % de leur objectif
+                                                        Fundraisers at 5% of their goal
                                                         </div>
                                                     </div>
                                                 </li>
@@ -289,10 +289,10 @@ function HomePage() {
                                                     <CampaignIcon className="bg-[#fbfaf8] text-1 rounded-full h-10! w-10! p-2" />
                                                     <div>
                                                         <div className="font-semibold text-1 text-base">
-                                                            Lancement récent
+                                                        Recent launch
                                                         </div>
                                                         <div className="text-[#6f6f6f] text-[14px]">
-                                                            Cagnottes créées ces deux derniers jours
+                                                        Fundraisers created in the last two days
                                                         </div>
                                                     </div>
                                                 </li>
@@ -305,11 +305,10 @@ function HomePage() {
                                                     <ElectricBoltIcon className="bg-[#fbfaf8] text-1 rounded-full h-10! w-10! p-2" />
                                                     <div>
                                                         <div className="font-semibold text-1 text-base">
-                                                            Besoin de dynamique
+                                                        Need some momentum
                                                         </div>
                                                         <div className="text-[#6f6f6f] text-[14px]">
-                                                            Cagnottes qui ont besoin d'un petit coup
-                                                            de pouce
+                                                        Fundraisers that need a little push
                                                         </div>
                                                     </div>
                                                 </li>
@@ -322,11 +321,10 @@ function HomePage() {
                                                     <TrendingUpIcon className="bg-[#fbfaf8] text-1 rounded-full h-10! w-10! p-2" />
                                                     <div>
                                                         <div className="font-semibold text-1 text-base">
-                                                            Actualité internationale
+                                                        International news
                                                         </div>
                                                         <div className="text-[#6f6f6f] text-[14px]">
-                                                            Cagnottes enregistrant un taux élevé de
-                                                            mobilisation des donateurs
+                                                        Fundraisers with a high donor engagement rate
                                                         </div>
                                                     </div>
                                                 </li>
@@ -342,8 +340,7 @@ function HomePage() {
                                                             Associations caritatives
                                                         </div>
                                                         <div className="text-[#6f6f6f] text-[14px]">
-                                                            Cagnottes au profit d'associations
-                                                            populaires
+                                                        Fundraisers for popular associations
                                                         </div>
                                                     </div>
                                                 </li>
@@ -379,7 +376,7 @@ function HomePage() {
                                                     className="absolute max-w-full h-full object-cover group-hover:scale-105 transition-all transition-normal duration-500 ease-in-out"
                                                 />
                                                 <span className="absolute inline-flex items-center rounded-xl bottom-3 text-white text-[.875rem] font-normal h-6 left-3 py-0 px-2 bg-[#00000080]">
-                                                    {mainItem.donaters} dons
+                                                    {mainItem.donaters} donations
                                                 </span>
                                             </div>
                                             <div className="py-5 px-3 flex flex-col justify-around text-1">
@@ -393,8 +390,7 @@ function HomePage() {
                                                         className="mt-6 bg-[#e5e1d7] w-full h-2 appearance-none text-[#008044] block rounded-full overflow-hidden"
                                                     />
                                                     <label className="block text-sm text-1 leading-[1.5] font-bold mt-1">
-                                                        {mainItem.progress.toLocaleString()} € de
-                                                        dons récoltés
+                                                        {mainItem.progress.toLocaleString()} € of donations collected
                                                     </label>
                                                 </div>
                                             </div>
@@ -418,7 +414,7 @@ function HomePage() {
                                                                 className="w-full object-cover group-hover:scale-110 transition-transform transition-normal duration-500 ease-in-out"
                                                             />
                                                             <span className="absolute inline-flex items-center rounded-xl bottom-3 text-white text-[.875rem] font-normal h-6 left-3 py-0 px-2 bg-[#00000080]">
-                                                                {item.donaters} dons
+                                                                {item.donaters} donations
                                                             </span>
                                                         </div>
                                                         <div className="py-5 px-3 flex flex-col justify-around text-1">
@@ -433,7 +429,7 @@ function HomePage() {
                                                                 />
                                                                 <label className="block text-sm text-1 leading-[1.5] font-bold mt-1">
                                                                     {item.progress.toLocaleString()}{" "}
-                                                                    € de dons récoltés
+                                                                    € of donations raised
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -452,7 +448,7 @@ function HomePage() {
             <section className="bg-white py-16 w-full relative">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <header className="mb-12">
-                        <h2 className="text-3xl font-semibold text-gray-900">Sujets à la une</h2>
+                        <h2 className="text-3xl font-semibold text-gray-900">Trending topics</h2>
                     </header>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -466,20 +462,18 @@ function HomePage() {
                                     />
                                     {/* <div className="hidden h-full w-full hover:block absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div> */}
                                     <span className="absolute top-4 left-4 px-3 py-1 text-sm font-bold text-[#7b00c0] bg-[#f1d8fe] rounded-full">
-                                        L'ouragan
+                                    The hurricane
                                     </span>
                                 </div>
                                 <div className="p-6">
                                     <h3 className="mb-3 text-xl font-bold">
-                                        Aider la population de Union Island à se remettre
+                                        Help the population of Union Island recover
                                     </h3>
                                     <p className="mb-6 text-gray-600">
-                                        "Avec vos fonds, nous achèterons de la nourriture, des
-                                        générateurs de fournitures et tous les articles nécessaires
-                                        à la population locale".
+                                    "With your funds, we will purchase food, generators, supplies, and all the necessary items for the local population."
                                     </p>
                                     <div className="flex items-center text-1 font-semibold">
-                                        <span>Je soutiens</span>
+                                        <span>I support</span>
                                         <ArrowForward className="ml-2" />
                                     </div>
                                 </div>
@@ -496,19 +490,18 @@ function HomePage() {
                                     />
                                     {/* <div className="hidden h-full w-full hover:block absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div> */}
                                     <span className="absolute top-4 left-4 px-3 py-1 text-sm font-bold text-[#7b00c0] bg-[#f1d8fe] rounded-full">
-                                        Guide et exemples
+                                    Guide and examples.
                                     </span>
                                 </div>
                                 <div className="p-6">
                                     <h3 className="mb-3 text-xl font-bold">
-                                        Lever des fonds pour évacuer les civils de Gaza
+                                    Raise funds to evacuate civilians from Gaza
                                     </h3>
                                     <p className="mb-6 text-gray-600">
-                                        Voici des directions et des conseils si vous souhaitez
-                                        collecter des fonds pour ceux qui tentent de quitter Gaza.
+                                    Here are directions and advice if you wish to raise funds for those trying to leave Gaza.
                                     </p>
                                     <div className="flex items-center text-1 font-semibold">
-                                        <span>En savoir plus</span>
+                                        <span>Learn more</span>
                                         <ArrowForward className="ml-2" />
                                     </div>
                                 </div>
@@ -533,8 +526,7 @@ function HomePage() {
                                         "clamp(32px, 1.25rem + 0.25 * (100vw - 23.4375rem) / 66.5625, 1.5rem)"
                                 }}
                                 className="font-bold mb-10 text-gray-900 max-w-[46rem]">
-                                La collecte de fonds sur GoFundMe est conviviale, efficace et
-                                sécurisée.
+                                Fundraising on GoFundMe is user-friendly, efficient, and secure.
                             </h2>
                             <div className="space-y-4 text-gray-700">
                                 <p
@@ -542,24 +534,20 @@ function HomePage() {
                                         fontSize:
                                             "clamp(1.25rem, 1.25rem + 0.25 * (100vw - 23.4375rem) / 66.5625, 1.5rem)"
                                     }}>
-                                    GoFundMe vous donne les moyens de réussir votre cagnotte afin de
-                                    réunir les fonds dont vous avez besoin pour vous, vos amis,
-                                    votre famille ou une association. Avec ses cagnottes sans frais
-                                    de démarrage pour les organisateurs, GoFundMe est la référence
-                                    en matière de
+                                    ChatGPT said:
+                                    Charity Proj gives you the means to successfully raise the funds you need for yourself, your friends, your family, or a charity. With its fee-free start-up for organizers, Charity Proj is the reference for...
                                     <a href="#" className="text-1 underline ml-1">
-                                        financement participatif
+                                    ...around the world for crowdfunding.
                                     </a>{" "}
-                                    à travers le monde pour les{" "}
+                                    around the world for the{" "}
                                     <a href="#" className="text-1 underline">
-                                        santé
+                                    health
                                     </a>{" "}
-                                    (urgences) et les{" "}
+                                    (Emergencies) and the{" "}
                                     <a href="#" className="text-1 underline">
-                                        associations à but non lucratif
+                                    non-profit organizations
                                     </a>
-                                    . Vous pouvez poser vos questions ici à tout moment si vous avez
-                                    besoin d'aide.
+                                    You can ask your questions here at any time if you need help.
                                 </p>
                                 <p
                                     style={{
@@ -567,13 +555,13 @@ function HomePage() {
                                             "clamp(1.25rem, 1.25rem + 0.25 * (100vw - 23.4375rem) / 66.5625, 1.5rem)"
                                     }}
                                     className="mb-4 mt-8">
-                                    Vous avez d'autres{" "}
+                                    Do you have others{" "}
                                     <a href="#" className="text-1 underline">
                                         questions
                                     </a>{" "}
-                                    ? En savoir plus sur{" "}
+                                    ?Learn more about{" "}
                                     <a href="#" className="text-1 underline">
-                                        la façon dont GoFundMe fonctionne
+                                    how Charity Proj works
                                     </a>
                                 </p>
                             </div>
@@ -585,11 +573,11 @@ function HomePage() {
             <section className="relative bg-white w-full py-20">
                 <div className="container mx-auto max-w-[48rem] lg:max-w-[64rem] xl:max-w-[72rem] px-4">
                     <header className="flex justify-between items-center w-full mb-6">
-                        <h2 className="text-2xl font-semibold">Comment fonctionne GoFundMe</h2>
+                        <h2 className="text-2xl font-semibold">How does Charity Proj work?</h2>
                         <a
                             href="#"
                             className="text-base font-semibold border border-gray-300 rounded-xl py-1 px-4 h-fit min-h-[32px]">
-                            En savoir plus
+                            Learn more
                         </a>
                     </header>
 
@@ -615,7 +603,7 @@ function HomePage() {
                             className="absolute bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-transparent px-6 py-2 rounded-xl cursor-pointer font-bold text-base text-center border-none min-h-[3rem] flex items-center"
                             onClick={() => setIsPlaying(true)}>
                             <PlayArrowIcon className="mr-1" />
-                            Lire la vidéo (1 min)
+                            Watch the video (1 min).
                         </button>
                     </div>
                 </div>
@@ -651,24 +639,23 @@ function HomePage() {
                     <div className="container mx-auto px-4 max-w-xs md:max-w-2xl lg:max-w-4xl">
                         <div className="max-w-4xl mx-auto h-[36rem] flex items-start justify-center flex-col">
                             <h2 className="font-bold mb-10 text-white max-w-[46rem] text-2xl lg:text-4xl">
-                                Vous ne courez aucun risque.
+                            You are not at risk.
                             </h2>
                             <div className="space-y-4 text-white font-bold">
                                 <span className="text-2xl lg:text-4xl leading-[1.4]">
-                                    GoFundMe est un acteur fiable, leader de la collecte de fonds en
-                                    ligne. Avec les
+                                Charity Proj is a reliable leader in online fundraising. With
                                     <a href="#" className="text-white underline ml-1">
-                                        tarifs simples
+                                    simple fees
                                     </a>{" "}
-                                    et l'équipe de
+                                    and the team of
                                     <a href="#" className="text-white underline">
                                         {" "}
-                                        confiance et sécurité
+                                        trust and security
                                     </a>{" "}
-                                    et ses experts, vous pouvez récolter de l'argent ou
+                                    and its experts, you can raise money or
                                 </span>
                                 <span className="text-2xl lg:text-4xl mb-4 mt-8">
-                                    faire un don en toute tranquillité.
+                                make a donation with peace of mind.
                                 </span>
                             </div>
                         </div>
@@ -680,30 +667,28 @@ function HomePage() {
                 <section className="pt-8 flex items-center justify-center bg-white">
                     <div className="w-7xl mt-0 my-auto px-4 pb-[10.5rem] max-w-[20rem] xl:max-w-[80rem] lg:max-w-[56rem] md:max-w-[40rem] sm:max-w-[36rem]">
                         <h2 className="font-semibold text-2xl">
-                            Collectez des fonds pour qui vous voulez
+                        Raise funds for whoever you want.
                         </h2>
                         <ul>
                             <li className="border-b border-[#ccc] pt-12 pb-8">
                                 <a href="">
                                     <div className="flex items-center justify-between text-1 font-semibold text-4xl group sm:text-2xl md:text-3xl  lg:text-4xl">
-                                        <h3>Vous</h3>
+                                        <h3>You</h3>
                                         <ArrowForwardIosIcon className="text-white text-center border border-[#ccc] pl-[10px] bg-black w-9! h-9! p-2 rounded-full group-hover:text-1 group-hover:bg-white" />
                                     </div>
                                     <p className="pt-6 mb-4 text-[#6f6f6f] text-xl">
-                                        Les fonds sont versés sur votre compte bancaire pour votre
-                                        usage personnel
+                                    The funds are deposited into your bank account for your personal use.
                                     </p>
                                 </a>
                             </li>
                             <li className="border-b border-[#ccc] pt-12 pb-8">
                                 <a href="">
                                     <div className="flex items-center justify-between text- font-semibold text-4xl group sm:text-2xl md:text-3xl  lg:text-4xl">
-                                        <h3 className="">Amis et famille</h3>
+                                        <h3 className="">Friends and family.</h3>
                                         <ArrowForwardIosIcon className="text-white text-center border border-[#ccc] pl-[10px] bg-black w-9! h-9! p-2 rounded-full group-hover:text-1 group-hover:bg-white" />
                                     </div>
                                     <p className="pt-6 mb-4 text-[#6f6f6f] text-xl">
-                                        Vous inviterez un bénéficiaire à recevoir les fonds ou vous
-                                        les reverserez vous-même{" "}
+                                    The funds are deposited into your bank account for your personal use.
                                     </p>
                                 </a>
                             </li>
@@ -714,8 +699,7 @@ function HomePage() {
                                         <ArrowForwardIosIcon className="text-white text-center border border-[#ccc] pl-[10px] bg-black w-9! h-9! p-2 rounded-full group-hover:text-1 group-hover:bg-white" />
                                     </div>
                                     <p className="pt-6 mb-4 text-[#6f6f6f] text-xl">
-                                        Les fonds sont remis à l'association à but non lucratif de
-                                        votre choix{" "}
+                                    The funds are given to the non-profit organization of your choice.{" "}
                                     </p>
                                 </a>
                             </li>
@@ -728,7 +712,7 @@ function HomePage() {
                     <a
                         href="#"
                         className="flex h-12 bg-[#008044] text-white font-bold text-lg rounded-[1.5625rem] py-[.6875rem] px-[1rem] items-center justify-center shadow hover:bg-[#015d32] transition-colors">
-                        Démarrer une cagnotte
+                        Start a fundraiser.
                     </a>
                 </div>
             )}
