@@ -12,7 +12,7 @@ const CampaignDetail = () => {
       setCampaign({
         id,
         title: "Frank’s 12-Year Battle Against Leukemia: Help Us Save Him",
-        image: "/path-to-image.jpg", // Thay bằng ảnh thực tế
+        image: "https://images.gofundme.com/p2aGDv0tS5I-ivJVWKQQB_A-XLo=/720x405/https://d2g8igdw686xgo.cloudfront.net/89469117_1741696270780805_r.png", // Thay bằng ảnh thực tế
         raised: 507053,
         goal: 530000,
         donations: 6700,
