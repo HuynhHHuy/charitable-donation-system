@@ -128,7 +128,7 @@ function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 py-12 mx-2">
                     <div>
                         <button className="flex items-center justify-center text-[16px] border rounded-xl p-2 min-h-8 border-[#c0bdb8]">
-                            <img src={franceIcon} alt="france icon" className="w-4 h-4 mr-2" />
+                            <img src={franceIcon} alt="england icon" className="w-4 h-4 mr-2" />
                             English
                             <span className="mx-2 mb-1 -mt-1">.</span>
                             english
