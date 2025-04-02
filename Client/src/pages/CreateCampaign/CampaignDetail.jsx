@@ -40,4 +40,4 @@ const CampaignDetail = () => {
   );
 };
 
-export default CampDetail;
+export default CampaignDetail;
