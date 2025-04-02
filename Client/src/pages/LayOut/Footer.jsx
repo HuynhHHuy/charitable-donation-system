@@ -15,11 +15,11 @@ function Footer() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Support Column */}
                     <div className="space-y-4">
-                        <h3 className="font-semibold ml-2 mb-1 text-xl text-1">Je soutiens</h3>
+                        <h3 className="font-semibold ml-2 mb-1 text-xl text-1">My Support</h3>
                         <ul className="space-y-2">
                             <li className="hover:bg-gray-50 cursor-pointer transition-colors rounded-xl p-2 m-0">
                                 <a href="#" className="text-lg text-1">
-                                    Catégories
+                                Categories
                                 </a>
                             </li>
                         </ul>
@@ -28,7 +28,7 @@ function Footer() {
                     {/* Fundraising Column */}
                     <div className="space-y-4">
                         <h3 className="font-semibold ml-2 mb-1 text-xl text-1">
-                            Collecter des fonds
+                        Raise funds
                         </h3>
                         <ul className="space-y-2">
                             {[
@@ -49,16 +49,16 @@ function Footer() {
 
                     {/* About Column */}
                     <div className="space-y-4">
-                        <h3 className="font-semibold ml-2 mb-1 text-xl text-1">À propos de</h3>
+                        <h3 className="font-semibold ml-2 mb-1 text-xl text-1">About</h3>
                         <ul className="space-y-2">
                             {[
-                                "Garantie des dons GoFundMe",
-                                "Pays couverts",
-                                "Tarifs",
-                                "Centre d'assistance",
-                                "À propos de GoFundMe",
-                                "Centre de presse",
-                                "Emplois"
+                                "GoFundMe Donation Guarantee",
+                                "Countries Covered",
+                                "Fees",
+                                "Help Center",
+                                "About GoFundMe",
+                                "Press Center",
+                                "Jobs"
                             ].map((item) => (
                                 <li
                                     key={item}
@@ -79,9 +79,7 @@ function Footer() {
                             className="h-16 w-16 object-contain"
                         />
                         <p className="text-gray-600 text-base">
-                            GoFundMe Ireland Limited est immatriculée à l'ORIAS en tant
-                            qu'Intermédiaire en Financement Participatif (IFP) sous le numéro
-                            d'immatriculation 24000751.
+                        Charity Proj is registered with ORIAS as a Crowdfunding Intermediary (IFP) under registration number 24000751
                         </p>
                     </div>
                 </div>
@@ -89,7 +87,7 @@ function Footer() {
                     <button
                         onClick={handleOpen}
                         className="flex px-2 py-1 font-semibold text-1 text-lg hover:bg-gray-50 cursor-pointer w-fit rounded-2xl ">
-                        Plus de ressources
+                        More resources
                         <KeyboardArrowDown
                             className={`ml-2 w-8! h-8!  ${isOpen ? "animate-spinACircle" : "animate-spinReverse"}`}
                         />
@@ -131,9 +129,9 @@ function Footer() {
                     <div>
                         <button className="flex items-center justify-center text-[16px] border rounded-xl p-2 min-h-8 border-[#c0bdb8]">
                             <img src={franceIcon} alt="france icon" className="w-4 h-4 mr-2" />
-                            France
+                            English
                             <span className="mx-2 mb-1 -mt-1">.</span>
-                            Français
+                            english
                         </button>
                     </div>
                     <div className="flex items-center md:justify-end">
@@ -173,17 +171,17 @@ function Footer() {
                         <a
                             href="#"
                             className="my-0 mr-2 px-2 py-1 cursor-pointer text-lg text-1 hover:bg-gray-100 rounded-xl transition-colors">
-                            Avis de confidentialité
+                            Privacy notice
                         </a>
                         <a
                             href="#"
                             className="my-0 mr-2 px-2 py-1 cursor-pointer text-lg text-1 hover:bg-gray-100 rounded-xl transition-colors">
-                            Fins juridiques
+                            Legal purposes
                         </a>
                         <a
                             href="#"
                             className="my-0 mr-2 px-2 py-1 cursor-pointer text-lg text-1 hover:bg-gray-100 rounded-xl transition-colors flex items-center md:justify-center">
-                            Vos choix en matière de confidentialité
+                            Your privacy choices
                             <img
                                 src="https://www.gofundme.com/nextassets/shared/privacy-pill.png"
                                 alt="#"
